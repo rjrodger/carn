@@ -1,5 +1,5 @@
 {
-  "name": "carn",
+  "name": "@rjrodger/carn",
   "version": "0.0.2",
   "description": "Structured source code builder",
   "main": "dist/carn.js",
