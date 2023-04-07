@@ -1,11 +1,11 @@
 {
   "name": "carn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Structured source code builder",
   "main": "dist/carn.js",
   "type": "commonjs",
-  "browser": "dist/ini.min.js",
-  "types": "dist/ini.d.ts",
+  "browser": "dist/carn.min.js",
+  "types": "dist/carn.d.ts",
   "homepage": "https://github.com/rjrodger/carn",
   "keywords": [
     "pattern",

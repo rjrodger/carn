@@ -1,8 +1,5 @@
 /* Copyright (c) 2023 Richard Rodger, MIT License */
 
-
-
-
 class Carn {
   id: number
   newline = '\n'
@@ -68,7 +65,7 @@ class Carn {
   }
 }
 
-// 
+//
 
 class Depth {
   indent: string
@@ -92,7 +89,4 @@ class Sep {
   }
 }
 
-
-export {
-  Carn
-}
+export { Carn }

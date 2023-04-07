@@ -2,9 +2,7 @@
 
 import { Carn } from '..'
 
-
 describe('carn', () => {
-
   test('happy', () => {
     const c0 = new Carn()
     expect(0 < c0.id).toEqual(true)
@@ -24,7 +22,6 @@ describe('carn', () => {
     console.log(src)
   })
 
-
   test('optsdesc', () => {
     const optsdesc = {
       foo: {
@@ -34,14 +31,14 @@ describe('carn', () => {
       bar: {
         type: 'number',
         short: 'Set the bar counter',
-      }
+      },
     }
 
     const c0 = new Carn()
 
     c0.start()
     c0.add('# Options')
-    Object.entries(optsdesc).forEach(entry => {
+    Object.entries(optsdesc).forEach((entry) => {
       let name = entry[0]
       let { type, short } = entry[1]
       c0.add(`* ${name}: ${type} - ${short}`)
@@ -51,7 +48,4 @@ describe('carn', () => {
     console.log('OPTS')
     console.log(src)
   })
-
-
-
 })

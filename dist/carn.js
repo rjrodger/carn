@@ -53,7 +53,7 @@ class Carn {
     }
 }
 exports.Carn = Carn;
-// 
+//
 class Depth {
     constructor(depth, indent) {
         this.depth = depth;
