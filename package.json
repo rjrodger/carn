@@ -1,6 +1,6 @@
 {
   "name": "@rjrodger/carn",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Structured source code builder",
   "main": "dist/carn.js",
   "type": "commonjs",
