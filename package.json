@@ -1,6 +1,6 @@
 {
   "name": "@rjrodger/carn",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Structured source code builder",
   "main": "dist/carn.js",
   "type": "commonjs",
@@ -34,9 +34,7 @@
   },
   "license": "MIT",
   "files": [
-    "*.ts",
-    "*.js",
-    "*.map",
+    "dist",
     "LICENSE"
   ],
   "devDependencies": {
