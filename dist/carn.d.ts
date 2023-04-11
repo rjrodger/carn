@@ -11,5 +11,6 @@ declare class Carn {
     sep(): void;
     depth(descend: number): void;
     src(): string;
+    inject(text: string, name: string, marker: string[]): string;
 }
 export { Carn };

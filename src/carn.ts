@@ -1,5 +1,6 @@
 /* Copyright (c) 2023 Richard Rodger, MIT License */
 
+
 class Carn {
   id: number
   newline = '\n'
@@ -62,6 +63,27 @@ class Carn {
 
     let str = this.s.join('') + this.newline
     return str
+  }
+
+
+  inject(text: string, name: string, marker: string[]) {
+    let src = this.src()
+    src = src.startsWith('\n') ? src : '\n' + src
+    src = src.endsWith('\n') ? src : src + '\n'
+
+    let mo = marker[0]
+    let mc = marker[1]
+
+    // TODO: jsonic escre
+    const re = new RegExp(
+      mo + 'START:' + name + mc + '.*?' + mo + 'END:' + name + mc,
+      's'
+    )
+    let out = text.replace(
+      re,
+      mo + 'START:' + name + mc + src + mo + 'END:' + name + mc,
+    )
+    return out
   }
 }
 
