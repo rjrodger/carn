@@ -1,6 +1,5 @@
 /* Copyright (c) 2023 Richard Rodger, MIT License */
 
-
 class Carn {
   id: number
   newline = '\n'
@@ -65,7 +64,6 @@ class Carn {
     return str
   }
 
-
   inject(text: string, name: string, marker: string[]) {
     let src = this.src()
     src = src.startsWith('\n') ? src : '\n' + src
@@ -81,7 +79,7 @@ class Carn {
     )
     let out = text.replace(
       re,
-      mo + 'START:' + name + mc + src + mo + 'END:' + name + mc,
+      mo + 'START:' + name + mc + src + mo + 'END:' + name + mc
     )
     return out
   }
