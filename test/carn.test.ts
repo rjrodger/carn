@@ -17,10 +17,19 @@ describe('carn', () => {
     c0.depth(-1)
     c0.add('}')
 
+    // console.log(c0.s)
+
     let src = c0.src()
-    console.log('SRC')
-    console.log(src)
+    // console.log('SRC')
+    // console.log(src)
+
+    expect(src).toEqual(`{
+  a:1,
+  b:2
+}
+`)
   })
+
 
   test('optsdesc', () => {
     const optsdesc = {
@@ -48,4 +57,21 @@ describe('carn', () => {
     console.log('OPTS')
     console.log(src)
   })
+
+
+  test('basic-error', () => {
+    const c0 = new Carn()
+
+    // c0.add('BAD')
+
+    expect(() => c0.add('BAD')).toThrow('Carn')
+
+    const ctx = c0.start()
+    c0.depth(-1, false)
+
+    // console.log(ctx)
+    expect(ctx.errs.length).toEqual(1)
+    expect(ctx.errs[0].code).toEqual('invalid_depth')
+  })
+
 })
