@@ -30,7 +30,6 @@ describe('carn', () => {
 `)
   })
 
-
   test('optsdesc', () => {
     const optsdesc = {
       foo: {
@@ -58,7 +57,6 @@ describe('carn', () => {
     console.log(src)
   })
 
-
   test('basic-error', () => {
     const c0 = new Carn()
 
@@ -73,5 +71,4 @@ describe('carn', () => {
     expect(ctx.errs.length).toEqual(1)
     expect(ctx.errs[0].code).toEqual('invalid_depth')
   })
-
 })

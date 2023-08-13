@@ -1,9 +1,6 @@
 /* Copyright (c) 2023 Richard Rodger, MIT License */
 
-
-
 type ErrCode = keyof typeof CarnError.Code
-
 
 class CarnContext {
   errs: any[]
@@ -55,7 +52,6 @@ class CarnContext {
   }
 }
 
-
 class CarnError extends Error {
   code: string
   cid: number
@@ -64,7 +60,7 @@ class CarnError extends Error {
   static Code = {
     not_active: 'Carn instance is not active (call Carn.start())',
     already_started: 'Carn instance is already started',
-    invalid_depth: 'Invalid depth (<0)'
+    invalid_depth: 'Invalid depth (<0)',
   }
 
   constructor(
@@ -74,20 +70,23 @@ class CarnError extends Error {
     details?: Record<string, any>,
     ...rest: any
   ) {
-    rest = 'string' === typeof details ? [details, ...rest] :
-      rest && 'string' === typeof rest[0] ? rest :
-        [CarnError.Code[code] || code, ...rest]
-    rest[0] += ` [id=${cid},run=${crun}]` +
-      (details ?
-        ' {' + Object.keys(details).map(k => k + ':' + details[k]) + '}' : '')
+    rest =
+      'string' === typeof details
+        ? [details, ...rest]
+        : rest && 'string' === typeof rest[0]
+        ? rest
+        : [CarnError.Code[code] || code, ...rest]
+    rest[0] +=
+      ` [id=${cid},run=${crun}]` +
+      (details
+        ? ' {' + Object.keys(details).map((k) => k + ':' + details[k]) + '}'
+        : '')
     super(...rest)
     this.code = code
     this.cid = cid
     this.crun = crun
   }
 }
-
-
 
 class Carn {
   id: number
@@ -107,7 +106,6 @@ class Carn {
     this.ctx = new CarnContext(this.id)
   }
 
-
   // Can be started multiple times, but must be in new or finished state.
   start(): CarnContext {
     if (-1 == this.ctx.start || this.ctx.finished()) {
@@ -115,13 +113,11 @@ class Carn {
       this.run = (1e6 * Math.random()) | 0
       this.ctx = new CarnContext(this.id)
       this.ctx.init(this.run)
-    }
-    else {
+    } else {
       this.ctx.error('already_started')
     }
     return this.ctx
   }
-
 
   add(str: any) {
     this.ctx.check()
@@ -132,12 +128,10 @@ class Carn {
     this.s.push(str)
   }
 
-
   sep() {
     this.ctx.check()
     this.s.push(new Sep(this.separator))
   }
-
 
   depth(move?: number, relative?: boolean) {
     this.ctx.check()
@@ -161,13 +155,11 @@ class Carn {
     return this.dI
   }
 
-
   finish(): CarnContext {
     this.ctx.check()
     this.ctx.finish = Date.now()
     return this.ctx
   }
-
 
   // TODO: remove spurious newline at end
   src() {
@@ -201,7 +193,6 @@ class Carn {
     return str
   }
 
-
   inject(text: string, name: string, marker: string[]) {
     let src = this.src()
     src = src.startsWith('\n') ? src : '\n' + src
@@ -213,11 +204,11 @@ class Carn {
     // TODO: jsonic escre
     const re = new RegExp(
       mo + 'START:' + name + mc + '.*?' + mo + 'END:' + name + mc,
-      's'
+      's',
     )
     let out = text.replace(
       re,
-      mo + 'START:' + name + mc + src + mo + 'END:' + name + mc
+      mo + 'START:' + name + mc + src + mo + 'END:' + name + mc,
     )
     return out
   }
@@ -229,11 +220,11 @@ class Depth {
   indent: string
   depth: number
   constructor(depth: number, indent: string) {
-    this.depth = depth < 0 ? 0 : depth
+    this.depth = null == depth || depth < 0 ? 0 : depth
     this.indent = indent
   }
   toString() {
-    return this.indent.repeat(this.depth)
+    return this.indent.repeat(isNaN(this.depth) ? 0 : this.depth)
   }
 }
 

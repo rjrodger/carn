@@ -41,12 +41,17 @@ class CarnContext {
 }
 class CarnError extends Error {
     constructor(cid, crun, code, details, ...rest) {
-        rest = 'string' === typeof details ? [details, ...rest] :
-            rest && 'string' === typeof rest[0] ? rest :
-                [CarnError.Code[code] || code, ...rest];
-        rest[0] += ` [id=${cid},run=${crun}]` +
-            (details ?
-                ' {' + Object.keys(details).map(k => k + ':' + details[k]) + '}' : '');
+        rest =
+            'string' === typeof details
+                ? [details, ...rest]
+                : rest && 'string' === typeof rest[0]
+                    ? rest
+                    : [CarnError.Code[code] || code, ...rest];
+        rest[0] +=
+            ` [id=${cid},run=${crun}]` +
+                (details
+                    ? ' {' + Object.keys(details).map((k) => k + ':' + details[k]) + '}'
+                    : '');
         super(...rest);
         this.code = code;
         this.cid = cid;
@@ -56,7 +61,7 @@ class CarnError extends Error {
 CarnError.Code = {
     not_active: 'Carn instance is not active (call Carn.start())',
     already_started: 'Carn instance is already started',
-    invalid_depth: 'Invalid depth (<0)'
+    invalid_depth: 'Invalid depth (<0)',
 };
 class Carn {
     constructor() {
@@ -157,11 +162,11 @@ exports.Carn = Carn;
 //
 class Depth {
     constructor(depth, indent) {
-        this.depth = depth < 0 ? 0 : depth;
+        this.depth = null == depth || depth < 0 ? 0 : depth;
         this.indent = indent;
     }
     toString() {
-        return this.indent.repeat(this.depth);
+        return this.indent.repeat(isNaN(this.depth) ? 0 : this.depth);
     }
 }
 class Sep {
